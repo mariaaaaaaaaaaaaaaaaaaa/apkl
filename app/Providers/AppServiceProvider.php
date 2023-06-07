@@ -22,7 +22,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        Paginator::useBootstrap();
+        if ($this->app->environment('production')) {
+            URL::forceScheme('https');
+        }
+//        Paginator::useBootstrap();
 //         Validator::extend('date_greater_than', function($attribute, $value, $parameters, $validator) {
 //             $inserted = Carbon::parse($value)->year;
 //             $since = $parameters[0];
